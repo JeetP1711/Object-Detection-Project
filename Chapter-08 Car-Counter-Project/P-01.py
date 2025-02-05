@@ -4,7 +4,7 @@ import cvzone
 import math
 import time
  
-cap = cv2.VideoCapture("D:\Object-Detection-Project\Videos\Traffic-Cars.mp4")  # For Video
+cap = cv2.VideoCapture("D:\Object-Detection-Project\Videos\cars.mp4")  # For Video
  
  
 model = YOLO("../Yolo-Weights/yolov8n.pt")
@@ -43,7 +43,7 @@ while True:
             cls = int(box.cls[0])
             currentClass = classNames[cls]
 
-            if currentClass == "car" and conf > 0.5:
+            if currentClass == "car" and conf > 0.7:
                  cvzone.putTextRect(img, f'{classNames[cls]} {conf}', (max(0, x1), max(35, y1)), scale=0.6, thickness=1,offset=3)
  
     fps = 1 / (new_frame_time - prev_frame_time)
@@ -51,7 +51,7 @@ while True:
     print(fps)
  
     cv2.imshow("Image", img)
-    cv2.waitKey(0)
+    cv2.waitKey(1)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break  # Press 'q' to exit the loop
